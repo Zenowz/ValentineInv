@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #ffb6c1, #ff8fab, #ff4d88);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .card {
+        background: #fff0f6;
+        padding: 40px;
+        border-radius: 25px;
+        text-align: center;
+        width: 380px;
+        box-shadow: 0 15px 40px rgba(255, 77, 136, 0.35);
+        animation: fadeIn 1.2s ease;
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        color: #d63384;
+        margin-bottom: 15px;
+        font-size: 28px;
+    }
+
+    p {
+        color: #ad1457;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .heart {
+        font-size: 45px;
+        animation: heartbeat 1.2s infinite;
+    }
+
+    @keyframes heartbeat {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .buttons {
+        margin-top: 25px;
+    }
+
+    button {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 8px;
+        transition: 0.3s ease;
+        font-weight: 500;
+    }
+
+    .yes {
+        background: linear-gradient(45deg, #ff4d88, #ff80ab);
+        color: white;
+        box-shadow: 0 5px 15px rgba(255, 77, 136, 0.4);
+    }
+
+    .yes:hover {
+        transform: scale(1.1);
+    }
+
+    .no {
+        background: #ffd1e8;
+        color: #ad1457;
+    }
+
+    .no:hover {
+        transform: scale(0.9);
+    }
+
+    #response {
+        margin-top: 20px;
+        font-weight: bold;
+        color: #d63384;
+        font-size: 16px;
+    }
+
+    .floating-heart {
+        position: absolute;
+        font-size: 20px;
+        animation: floatUp 6s linear infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+        from {
+            transform: translateY(100vh);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-10vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <div class="heart">💗</div>
+    <h1>Happy Valentine’s Day</h1>
+    <p>
+        Every moment with you feels special.
+        <br><br>
+        Would you like to be my Valentine this year?
+    </p>
+
+    <div class="buttons">
+        <button class="yes" onclick="sayYes()">YES 💖</button>
+        <button class="no" onclick="sayNo()">Maybe 🤭</button>
+    </div>
+
+    <div id="response"></div>
+</div>
+
+<script>
+function sayYes() {
+    document.getElementById("response").innerHTML =
+        "You just made my heart so happy 💕";
+}
+
+function sayNo() {
+    document.getElementById("response").innerHTML =
+        "I’ll keep trying 😌💗";
+}
+
+// Floating hearts
+for (let i = 0; i < 15; i++) {
+    let heart = document.createElement("div");
+    heart.classList.add("floating-heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+    document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
