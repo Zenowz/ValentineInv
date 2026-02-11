@@ -12,12 +12,11 @@ body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #ffb6c1, #ff8fab, #ff4d88);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     padding: 40px 0;
     overflow-x: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 .card {
@@ -44,29 +43,39 @@ p {
     color: #ad1457;
 }
 
+/* BUTTON AREA FIX */
+.button-area {
+    margin-top: 20px;
+    position: relative;
+    height: 80px;
+}
+
 button {
     padding: 12px 25px;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    margin: 8px;
     font-weight: 500;
     transition: 0.3s ease;
+    position: absolute;
 }
 
 .yes {
     background: linear-gradient(45deg, #ff4d88, #ff80ab);
     color: white;
+    left: 50%;
+    transform: translateX(-120%);
 }
 
 .yes:hover {
-    transform: scale(1.1);
+    transform: translateX(-120%) scale(1.1);
 }
 
 .no {
     background: #ffd1e8;
     color: #ad1457;
-    position: absolute;
+    left: 50%;
+    transform: translateX(20%);
 }
 
 /* Invitation info box */
@@ -137,8 +146,10 @@ button {
     <h1>Will You Be My Valentine? 💖</h1>
     <p>I want this one to be special.</p>
 
-    <button class="yes" onclick="sayYes()">YES 💕</button>
-    <button class="no" id="noBtn">No 😢</button>
+    <div class="button-area">
+        <button class="yes" onclick="sayYes()">YES 💕</button>
+        <button class="no" id="noBtn">No 😢</button>
+    </div>
 </div>
 
 <!-- SECOND PAGE -->
@@ -153,23 +164,23 @@ button {
 
     <div class="photo-gallery">
         <div class="polaroid">
-            <img src="images/photo1.jpg" alt="">
-            <p>Sundo Commute Days </p>
+            <img src="images/photo1.jpg">
+            <p>Sundo Commute Days</p>
         </div>
         <div class="polaroid">
-            <img src="images/photo2.jpg" alt="">
-            <p>Our First Polaroid </p>
+            <img src="images/photo2.jpg">
+            <p>Our First Polaroid</p>
         </div>
         <div class="polaroid">
-            <img src="images/photo3.jpeg" alt="">
-            <p>Beach With You </p>
+            <img src="images/photo3.jpeg">
+            <p>Beach With You</p>
         </div>
         <div class="polaroid">
-            <img src="images/photo4.jpeg" alt="">
-            <p>Hilltop Tambay </p>
+            <img src="images/photo4.jpeg">
+            <p>Hilltop Tambay</p>
         </div>
         <div class="polaroid">
-            <img src="images/photo5.jpeg" alt="">
+            <img src="images/photo5.jpeg">
             <p>Wow Prenup?</p>
         </div>
     </div>
@@ -184,7 +195,7 @@ function moveNoButton() {
     const btnRect = noBtn.getBoundingClientRect();
 
     const maxX = cardRect.width - btnRect.width - 20;
-    const maxY = cardRect.height - btnRect.height - 20;
+    const maxY = 60;
 
     const randomX = Math.random() * maxX;
     const randomY = Math.random() * maxY;
