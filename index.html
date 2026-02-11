@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .card {
@@ -24,10 +24,10 @@ body {
     padding: 40px;
     border-radius: 25px;
     text-align: center;
-    width: 380px;
+    width: 400px;
+    max-width: 95%;
     box-shadow: 0 15px 40px rgba(255, 77, 136, 0.35);
     position: relative;
-    transition: 0.6s ease;
 }
 
 .hidden {
@@ -41,7 +41,6 @@ h1 {
 
 p {
     color: #ad1457;
-    font-size: 15px;
 }
 
 button {
@@ -57,7 +56,6 @@ button {
 .yes {
     background: linear-gradient(45deg, #ff4d88, #ff80ab);
     color: white;
-    box-shadow: 0 5px 15px rgba(255, 77, 136, 0.4);
 }
 
 .yes:hover {
@@ -67,27 +65,67 @@ button {
 .no {
     background: #ffd1e8;
     color: #ad1457;
-    position: relative;
+    position: absolute;
 }
 
-#response {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #d63384;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
-}
-
+/* Invitation info box */
 .info-box {
     margin-top: 20px;
     background: #ffe3ec;
     padding: 15px;
     border-radius: 15px;
+}
+
+/* Photo Gallery */
+.photo-gallery {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.polaroid {
+    background: white;
+    padding: 10px 10px 25px 10px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
+    text-align: center;
+    width: 130px;
+    animation: glow 3s ease-in-out infinite alternate;
+    transition: transform 0.3s ease;
+}
+
+.polaroid:nth-child(1) { transform: rotate(-4deg); }
+.polaroid:nth-child(2) { transform: rotate(3deg); }
+.polaroid:nth-child(3) { transform: rotate(-2deg); }
+.polaroid:nth-child(4) { transform: rotate(4deg); }
+.polaroid:nth-child(5) { transform: rotate(-3deg); }
+
+.polaroid:hover {
+    transform: scale(1.08) rotate(0deg);
+}
+
+.polaroid img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.polaroid p {
+    font-size: 12px;
+    margin-top: 8px;
+    color: #d63384;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3); }
+    to { box-shadow: 0 15px 35px rgba(255, 20, 147, 0.6); }
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); opacity: 0; }
 }
 </style>
 </head>
@@ -96,23 +134,43 @@ button {
 <!-- FIRST PAGE -->
 <div class="card" id="firstPage">
     <h1>Will You Be My Valentine? 💖</h1>
-    
+    <p>I want this one to be special.</p>
 
     <button class="yes" onclick="sayYes()">YES 💕</button>
     <button class="no" id="noBtn">No 😢</button>
-
-    <div id="response"></div>
 </div>
 
 <!-- SECOND PAGE -->
 <div class="card hidden" id="secondPage">
     <h1>It's a Date 💗</h1>
-    <p>I can't wait to spend this day with you bubba.</p>
 
     <div class="info-box">
         <p><strong>📅 When:</strong> February 14, 7:00 PM</p>
         <p><strong>📍 Where:</strong> Sumo Niku Abreeza</p>
         <p><strong>💌 What:</strong> Dinner, surprises, and lots of love</p>
+    </div>
+
+    <div class="photo-gallery">
+        <div class="polaroid">
+            <img src="images/photo1.jpg" alt="">
+            <p>Our First Adventure 💕</p>
+        </div>
+        <div class="polaroid">
+            <img src="images/photo2.jpg" alt="">
+            <p>That Perfect Day ✨</p>
+        </div>
+        <div class="polaroid">
+            <img src="images/photo3.jpeg" alt="">
+            <p>Laughing With You 😄</p>
+        </div>
+        <div class="polaroid">
+            <img src="images/photo4.jpeg" alt="">
+            <p>Unforgettable Moment 💖</p>
+        </div>
+        <div class="polaroid">
+            <img src="images/photo5.jpeg" alt="">
+            <p>My Favorite Person 💘</p>
+        </div>
     </div>
 </div>
 
@@ -130,25 +188,17 @@ function moveNoButton() {
     const randomX = Math.random() * maxX;
     const randomY = Math.random() * maxY;
 
-    noBtn.style.position = "absolute";
     noBtn.style.left = randomX + "px";
     noBtn.style.top = randomY + "px";
 }
 
-// Desktop hover
 noBtn.addEventListener("mouseover", moveNoButton);
-
-// Mobile touch
 noBtn.addEventListener("touchstart", function(e) {
     e.preventDefault();
     moveNoButton();
 });
 
-// YES button
 function sayYes() {
-    document.getElementById("response").innerHTML =
-        "You just made my heart explode 💖✨";
-
     for (let i = 0; i < 40; i++) {
         let heart = document.createElement("div");
         heart.innerHTML = "💖";
@@ -163,10 +213,10 @@ function sayYes() {
     setTimeout(() => {
         document.getElementById("firstPage").classList.add("hidden");
         document.getElementById("secondPage").classList.remove("hidden");
-    }, 1500);
+        window.scrollTo(0,0);
+    }, 1200);
 }
 </script>
-
 
 </body>
 </html>
