@@ -13,10 +13,15 @@ body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #ffb6c1, #ff8fab, #ff4d88);
     min-height: 100vh;
-    padding: 40px 0;
     overflow-x: hidden;
+}
+
+/* Center first page */
+.page-center {
+    min-height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .card {
@@ -43,7 +48,7 @@ p {
     color: #ad1457;
 }
 
-/* BUTTON AREA FIX */
+/* BUTTON AREA */
 .button-area {
     margin-top: 20px;
     position: relative;
@@ -78,7 +83,7 @@ button {
     transform: translateX(20%);
 }
 
-/* Invitation info box */
+/* Invitation box */
 .info-box {
     margin-top: 20px;
     background: #ffe3ec;
@@ -137,23 +142,60 @@ button {
 @keyframes fall {
     to { transform: translateY(110vh); opacity: 0; }
 }
+
+/* Secret Letter */
+.secret-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.secret-btn {
+    background: linear-gradient(45deg, #ff4d88, #ff80ab);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.secret-btn:hover {
+    transform: scale(1.05);
+}
+
+.letter {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+    box-shadow: 0 10px 20px rgba(255,105,180,0.3);
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
 <body>
 
 <!-- FIRST PAGE -->
-<div class="card" id="firstPage">
-    <h1>Will You Be My Valentine? 💖</h1>
-    <p>I want this one to be special.</p>
+<div class="page-center" id="firstWrapper">
+    <div class="card" id="firstPage">
+        <h1>Will You Be My Valentine? 💖</h1>
+        <p>I want this one to be special.</p>
 
-    <div class="button-area">
-        <button class="yes" onclick="sayYes()">YES 💕</button>
-        <button class="no" id="noBtn">No 😢</button>
+        <div class="button-area">
+            <button class="yes" onclick="sayYes()">YES 💕</button>
+            <button class="no" id="noBtn">No 😢</button>
+        </div>
     </div>
 </div>
 
 <!-- SECOND PAGE -->
-<div class="card hidden" id="secondPage">
+<div class="card hidden" id="secondPage" style="margin: 40px auto;">
     <h1>It's a Date 💗</h1>
 
     <div class="info-box">
@@ -182,6 +224,25 @@ button {
         <div class="polaroid">
             <img src="images/photo5.jpeg">
             <p>Wow Prenup?</p>
+        </div>
+    </div>
+
+    <!-- SECRET LETTER -->
+    <div class="secret-section">
+        <button class="secret-btn" onclick="toggleLetter()">
+            Open My Secret Letter 💌
+        </button>
+
+        <div class="letter" id="loveLetter">
+            <p>
+                From the moment you came into my life,
+                everything felt brighter and warmer.
+                <br><br>
+                You are my favorite person, my safe place,
+                and the best part of my days.
+                <br><br>
+                I’m so lucky to love you. 💖
+            </p>
         </div>
     </div>
 </div>
@@ -223,10 +284,16 @@ function sayYes() {
     }
 
     setTimeout(() => {
-        document.getElementById("firstPage").classList.add("hidden");
+        document.getElementById("firstWrapper").style.display = "none";
         document.getElementById("secondPage").classList.remove("hidden");
         window.scrollTo(0,0);
     }, 1200);
+}
+
+function toggleLetter() {
+    const letter = document.getElementById("loveLetter");
+    letter.style.display =
+        letter.style.display === "block" ? "none" : "block";
 }
 </script>
 
